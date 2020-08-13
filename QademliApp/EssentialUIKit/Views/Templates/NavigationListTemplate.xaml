@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid
+    x:Class="QademliApp.Views.Templates.NavigationListTemplate"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Grid.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Grid.Resources>
+
+    <Grid ColumnSpacing="0" RowSpacing="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--  Image to display the Item  -->
+
+        <Frame CornerRadius="40" 
+           Padding="0"
+           IsClippedToBounds="True">
+        <Image
+            
+            Aspect="AspectFill"
+            BackgroundColor="{DynamicResource Gray-200}"
+            HeightRequest="10"
+            WidthRequest="10">
+            
+            <Image.Source >
+                <UriImageSource
+                    
+                    CacheValidity="14"
+                    CachingEnabled="true"
+                    Uri="{Binding ItemImage}" />
+            </Image.Source>
+        </Image>
+        </Frame>
+
+        <StackLayout
+            Grid.Column="1"
+            Padding="16"
+            HorizontalOptions="FillAndExpand"
+            Spacing="0"
+            VerticalOptions="FillAndExpand">
+
+            <!--  Name of the item  -->
+            <Label
+                
+                FontFamily="{StaticResource Montserrat-SemiBold}"
+                FontSize="16"
+                LineHeight="{OnPlatform Android=1.5,
+                                        Default=-1}"
+                Text="{Binding ItemName}"
+                TextColor="#001d57" />
+
+            <!--  Description about the item  -->
+            <Label
+                Margin="0,4,0,8"
+                FontFamily="{StaticResource Montserrat-Medium}"
+                FontSize="12"
+                LineHeight="{OnPlatform Android=1.25,
+                                        Default=-1}"
+                Text="{Binding ItemDescription}"
+                TextColor="#b5b5b5" />
+
+            <!--  Average rating from the overall rating  -->
+            
+        </StackLayout>
+    </Grid>
+</Grid>

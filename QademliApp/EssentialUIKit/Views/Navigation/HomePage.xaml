@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+    <ContentPage
+    x:Class="QademliApp.Views.Navigation.HomePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:badge="clr-namespace:Syncfusion.XForms.BadgeView;assembly=Syncfusion.SfBadgeView.XForms"
+    xmlns:controls="clr-namespace:QademliApp.Controls"
+    xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:template="clr-namespace:QademliApp.Views.Templates"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    
+    xmlns:viewModel="clr-namespace:QademliApp.ViewModels.Navigation"
+    BackgroundColor="{DynamicResource Gray-White}"
+    NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--  Title View  -->
+            <controls:TitleView Title="Filter Area" Grid.Row="0">
+
+            </controls:TitleView>
+
+
+            <StackLayout Grid.Row="1" Spacing="0">
+
+                <listView:SfListView
+                    ItemTapped="lvItemTapped"
+                    Padding="15,0,10,0"
+                    AutoFitMode="Height"
+                    IsScrollBarVisible="false"
+                    ItemSpacing="0,5,0,0"
+                    ItemsSource="{Binding NavigationList}"
+                    SelectionBackgroundColor="Transparent"
+                    TapCommand="{Binding ItemTappedCommand}"
+                    VerticalOptions="FillAndExpand">
+
+                    <listView:SfListView.ItemTemplate>
+
+                        <DataTemplate>
+
+                            <ViewCell>
+                                <!--  View of each card item  -->
+                                <controls:CustomShadowFrame
+                                    HeightRequest="100"
+            WidthRequest="332"
+                                    Margin="0,2,5,5"
+                                    Padding="5,10"
+                                    BackgroundColor="{DynamicResource Gray-200}"
+                                    BorderColor="#e9edf0"
+                                    BorderWidth="1"
+                                    CornerRadius="20"
+                                    HasShadow="True"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand">
+                                    <template:NavigationListTemplate />
+                                </controls:CustomShadowFrame>
+                            </ViewCell>
+
+                        </DataTemplate>
+                    </listView:SfListView.ItemTemplate>
+
+                </listView:SfListView>
+
+            </StackLayout>
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="QademliApp.Views.Forms.SimpleSignUpPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:control="clr-namespace:QademliApp.Controls"
+    xmlns:converter="clr-namespace:QademliApp.Converters"
+    xmlns:core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
+    xmlns:local="clr-namespace:QademliApp.Views.Forms"
+    xmlns:viewModel="clr-namespace:QademliApp.ViewModels.Forms"
+    Title="Sign Up"
+    BackgroundColor="{DynamicResource Gray-200}"
+    NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!--  Binding context for sign-up page  -->
+    <ContentPage.BindingContext>
+        <viewModel:SignUpPageViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <ScrollView HorizontalOptions="Center">
+            <ScrollView.VerticalOptions>
+                <OnIdiom
+                    x:TypeArguments="LayoutOptions"
+                    Default="CenterAndExpand"
+                    Phone="FillAndExpand" />
+            </ScrollView.VerticalOptions>
+
+            <StackLayout
+                Margin="{core:OnPlatformOrientationThickness PhonePortrait='20,32',
+                                                             PhoneLandscape='150,32',
+                                                             TabletPortrait='200,50',
+                                                             TabletLandscape='300,50',
+                                                             Desktop='30'}"
+                Spacing="0"
+                VerticalOptions="FillAndExpand"
+                WidthRequest="{OnPlatform Default='-1',
+                                          UWP='350'}">
+                <StackLayout
+                    HorizontalOptions="Center"
+                    Spacing="24"
+                    VerticalOptions="CenterAndExpand">
+
+                    <!--  Label to display the title of this page  -->
+                    <Label
+                         Grid.Row="1"
+                           FontFamily="Arial-BoldMT, Arial"
+                        Font="700"
+                        FontSize="22"
+                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource LabelStyle}"
+                        Text="Sign Up to Qademli"
+                        TextColor="#001d57" />
+
+
+                    <!--  Entry to get FirstName from user  -->
+                    <border:SfBorder
+                        BackgroundColor="{DynamicResource Gray-White}"
+                        BorderColor="{Binding Source={x:Reference FirstNameEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource SfBorderStyle}">
+                        <control:BorderlessEntry
+                            x:Name="FirstNameEntry"
+                            Placeholder="First Name"
+                            PlaceholderColor="{DynamicResource Gray-700}"
+                            Style="{StaticResource EntryStyle}"
+                            Text="{Binding Name}"
+                            TextColor="{DynamicResource Gray-900}" />
+                    </border:SfBorder>
+                    <!--  Entry to get Middle Name from user  -->
+                    <border:SfBorder
+                        BackgroundColor="{DynamicResource Gray-White}"
+                        BorderColor="{Binding Source={x:Reference MiddleNameEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource SfBorderStyle}">
+                        <control:BorderlessEntry
+                            x:Name="MiddleNameEntry"
+                            Placeholder="Middle Name"
+                            PlaceholderColor="{DynamicResource Gray-700}"
+                            Style="{StaticResource EntryStyle}"
+                            Text="{Binding Name}"
+                            TextColor="{DynamicResource Gray-900}" />
+                    </border:SfBorder>
+                    <!--  Entry to get username from user  -->
+                    <border:SfBorder
+                        BackgroundColor="{DynamicResource Gray-White}"
+                        BorderColor="{Binding Source={x:Reference LastNameEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource SfBorderStyle}">
+                        <control:BorderlessEntry
+                            x:Name="LastNameEntry"
+                            Placeholder="Last Name"
+                            PlaceholderColor="{DynamicResource Gray-700}"
+                            Style="{StaticResource EntryStyle}"
+                            Text="{Binding Name}"
+                            TextColor="{DynamicResource Gray-900}" />
+                    </border:SfBorder>
+
+                    <!--  Entry to get email ID from user  -->
+                    <local:SimpleEmailEntry />
+
+                    <!--  Entry to get password from user  -->
+                    <border:SfBorder
+                        BackgroundColor="{DynamicResource Gray-White}"
+                        BorderColor="{Binding Source={x:Reference PasswordEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource SfBorderStyle}">
+                        <control:BorderlessEntry
+                            x:Name="PasswordEntry"
+                            IsPassword="true"
+                            Placeholder="Password"
+                            PlaceholderColor="{DynamicResource Gray-700}"
+                            Style="{StaticResource EntryStyle}"
+                            Text="{Binding Password}"
+                            TextColor="{DynamicResource Gray-900}" />
+                    </border:SfBorder>
+
+                    <!--  Entry to get the confirm password from user  -->
+                    <border:SfBorder
+                        BackgroundColor="{DynamicResource Gray-White}"
+                        BorderColor="{Binding Source={x:Reference ConfirmPasswordEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource SfBorderStyle}">
+                        <control:BorderlessEntry
+                            x:Name="ConfirmPasswordEntry"
+                            IsPassword="true"
+                            Placeholder="Confirm Password"
+                            PlaceholderColor="{DynamicResource Gray-700}"
+                            Style="{StaticResource EntryStyle}"
+                            Text="{Binding ConfirmPassword}"
+                            TextColor="{DynamicResource Gray-900}" />
+                    </border:SfBorder>
+
+                    <!--  Sign-up button  -->
+                    <buttons:SfButton
+                        Grid.Row="3"
+                        Clicked="Register_Clicked"
+                        Margin="0,16,0,16"
+                         BackgroundColor="#001d57"
+                        FontFamily="Arial-BoldMT, Arial"
+                        Command="{Binding RegisterCommand}"
+                        CornerRadius="20"
+                        HeightRequest="40">
+                        <buttons:SfButton.Content>
+                            <StackLayout
+                                HorizontalOptions="CenterAndExpand"
+                                Orientation="Horizontal"
+                                VerticalOptions="Center">
+
+                                <Label
+                                    FontFamily="{StaticResource Montserrat-Medium}"
+                                    FontSize="16"
+                                    Text="Register"
+                                    TextColor="{DynamicResource Gray-White}" />
+                            </StackLayout>
+                        </buttons:SfButton.Content>
+                    </buttons:SfButton>
+                </StackLayout>
+
+                <StackLayout
+                    HorizontalOptions="Center"
+                    Orientation="Horizontal"
+                    Spacing="1"
+                    VerticalOptions="End">
+
+                    <!--<StackLayout.Padding>
+                        <OnIdiom
+                            x:DataType="Thickness"
+                            Default="0, 48, 0, 0"
+                            Phone="0" />
+                    </StackLayout.Padding>-->
+
+                    <Label
+                          FontFamily="Arial-BoldMT, Arial"
+                        HorizontalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource LabelStyle}"
+                        Text="Already have an account?"
+                        TextColor="{DynamicResource Gray-800}"
+                        VerticalTextAlignment="Center" />
+
+                    <buttons:SfButton
+                        Clicked="SignIn_Clicked"
+                        Grid.Row="8"
+                        Command="{Binding SignUpCommand}"
+                        CornerRadius="4"
+                        Style="{StaticResource SfFlatButtonStyle}"
+                        Text="Sign In" />
+
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
